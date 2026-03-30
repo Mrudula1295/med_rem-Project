@@ -1,4 +1,5 @@
-const API_BASE = 'https://med-rem-project.onrender.com/api';
+// Reads the URL from Vercel's Environment Variables, defaults to localhost if running locally
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
 
 export async function fetchAPI(endpoint, method = 'GET', body = null, isFormData = false) {
     const headers = {};
@@ -46,5 +47,8 @@ export function logout() {
 
 export function getBackendUrl(path) {
     if (!path) return 'https://via.placeholder.com/300x200?text=No+Image';
-    return `http://localhost:8080${path}`;
+    
+    // Strip "/api" from API_BASE to get the root server URL
+    const rootUrl = API_BASE.replace('/api', '');
+    return `${rootUrl}${path}`;
 }
