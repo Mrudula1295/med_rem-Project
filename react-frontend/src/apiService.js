@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8080/api';
+const API_BASE = 'https://med-rem-project.onrender.com/api';
 
 export async function fetchAPI(endpoint, method = 'GET', body = null, isFormData = false) {
     const headers = {};
@@ -21,7 +21,7 @@ export async function fetchAPI(endpoint, method = 'GET', body = null, isFormData
             const errorText = await response.text();
             throw new Error(errorText || 'API request failed');
         }
-        
+
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.indexOf("application/json") !== -1) {
             return await response.json();
