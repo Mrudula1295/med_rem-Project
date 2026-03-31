@@ -4,7 +4,13 @@ import { fetchAPI } from '../apiService';
 import { useToast } from '../components/ToastProvider';
 
 const Signup = () => {
-    const [userData, setUserData] = useState({ username: '', password: '', role: 'PATIENT' });
+    const [userData, setUserData] = useState({ 
+        username: '', 
+        password: '', 
+        email: '', 
+        mobile: '',
+        role: 'PATIENT' 
+    });
     const navigate = useNavigate();
     const { showToast } = useToast();
 
@@ -15,7 +21,7 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const user = await fetchAPI('/auth/register', 'POST', userData);
+            const user = await fetchAPI('/auth/signup', 'POST', userData);
             localStorage.setItem('user', JSON.stringify(user));
             showToast('Registration successful!', 'success');
             navigate('/dashboard');
@@ -32,6 +38,14 @@ const Signup = () => {
                     <div className="form-group">
                         <label>Username</label>
                         <input type="text" name="username" value={userData.username} onChange={handleChange} required />
+                    </div>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" value={userData.email} onChange={handleChange} required />
+                    </div>
+                    <div className="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" name="mobile" value={userData.mobile} onChange={handleChange} required />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
