@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchAPI } from '../apiService';
+import { fetchAPI, API_BASE } from '../apiService';
 import { useToast } from '../components/ToastProvider';
 
 const Signup = () => {
@@ -54,7 +54,10 @@ const Signup = () => {
                     <button type="submit" className="btn">Sign Up</button>
                 </form>
                 <div className="auth-links">
-                    Already have an account? <Link to="/login">Log in</Link>
+                    Already have an account? <Link to="/login">Login here</Link>
+                </div>
+                <div style={{ marginTop: '20px', fontSize: '10px', opacity: 0.5 }}>
+                    Connecting to: {API_BASE}
                 </div>
             </div>
         </div>

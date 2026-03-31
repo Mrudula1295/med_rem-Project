@@ -42,6 +42,9 @@ const Login = () => {
                 <div className="auth-links">
                     Don't have an account? <Link to="/signup">Register here</Link>
                 </div>
+                <div style={{ marginTop: '20px', fontSize: '10px', opacity: 0.5 }}>
+                    Connecting to: {API_BASE}
+                </div>
             </div>
         </div>
     );
