@@ -10,9 +10,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "<h1>🚀 MedReminder Backend is LIVE!</h1>" +
-               "<p>The API is running and connected to the database.</p>" +
-               "<p>Use your <b>Vercel</b> link to access the dashboard.</p>" +
-               "<p><b>API Base:</b> /api</p>";
+        return "MedReminder Backend is LIVE! (Running on port 8080)";
     }
 }
