@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reminders")
+@CrossOrigin("*")
 public class ReminderController {
 
     @Autowired
@@ -22,7 +23,9 @@ public class ReminderController {
                                          @RequestParam("reminderTime") String reminderTimeStr,
                                          @RequestParam(value = "repeatMode", defaultValue = "NONE") String repeatMode) {
         try {
-            LocalDateTime reminderTime = LocalDateTime.parse(reminderTimeStr);
+            // Support both YYYY-MM-DDTHH:MM:SS and YYYY-MM-DDTHH:MM
+            String formattedTime = reminderTimeStr.length() == 16 ? reminderTimeStr + ":00" : reminderTimeStr;
+            LocalDateTime reminderTime = LocalDateTime.parse(formattedTime);
             Reminder reminder = reminderService.setReminder(medicineId, reminderTime, repeatMode);
             return ResponseEntity.ok(reminder);
         } catch (Exception e) {

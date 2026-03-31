@@ -20,7 +20,7 @@ export async function fetchAPI(endpoint, method = 'GET', body = null, isFormData
         const response = await fetch(`${API_BASE}${endpoint}`, options);
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(errorText || 'API request failed');
+            throw new Error(errorText || `HTTP Error ${response.status}`);
         }
 
         const contentType = response.headers.get("content-type");
@@ -30,6 +30,10 @@ export async function fetchAPI(endpoint, method = 'GET', body = null, isFormData
             return await response.text();
         }
     } catch (error) {
+        if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+            console.error("Network Error: Possible CORS issue or Backend is down.", error);
+            throw new Error("Unable to connect to the server. Please check your internet or ensure the Backend URL is correct in Vercel settings.");
+        }
         console.error("API Error:", error);
         throw error;
     }
