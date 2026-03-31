@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchAPI } from '../apiService';
+import { fetchAPI, API_BASE } from '../apiService';
 import { useToast } from '../components/ToastProvider';
 
 const Login = () => {
